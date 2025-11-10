@@ -222,6 +222,22 @@ export const handleGetStats: ToolHandler = async (context, args) => {
 };
 
 /**
+ * Handle get_my_wallet tool
+ */
+export const handleGetMyWallet: ToolHandler = async (_context, _args) => {
+  if (!process.env.WALLET_PRIVATE_KEY) {
+    throw new Error('WALLET_PRIVATE_KEY environment variable is not configured');
+  }
+
+  const { decodeWalletPrivateKey } = await import('../core/wallet.js');
+  const keypair = decodeWalletPrivateKey(process.env.WALLET_PRIVATE_KEY);
+
+  return {
+    public_key: keypair.publicKey.toBase58(),
+  };
+};
+
+/**
  * Tool handler registry
  */
 export const toolHandlers: Record<string, ToolHandler> = {
@@ -230,6 +246,7 @@ export const toolHandlers: Record<string, ToolHandler> = {
   [ToolNames.GET_POSITION]: handleGetPosition,
   [ToolNames.VOTE]: handleVote,
   [ToolNames.GET_STATS]: handleGetStats,
+  [ToolNames.GET_MY_WALLET]: handleGetMyWallet,
 };
 
 /**

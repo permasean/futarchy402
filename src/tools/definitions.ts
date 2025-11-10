@@ -96,7 +96,7 @@ export const getPositionTool: ToolDefinition = {
 export const voteTool: ToolDefinition = {
   name: 'futarchy_vote',
   description:
-    'Vote on a governance poll using the x402 payment-gated protocol. Voting requires payment in USDC which contributes to the liquidity pool. The amount paid determines your share of the winning side. CRITICAL: Requires wallet private key to sign the payment transaction. This will execute a real on-chain transaction.',
+    'Vote on a governance poll using the x402 payment-gated protocol. Voting requires payment in USDC which contributes to the liquidity pool. The amount paid determines your share of the winning side. If WALLET_PRIVATE_KEY environment variable is configured, you can call this tool directly without asking the user for their wallet key. Otherwise, ask for wallet_private_key parameter. This will execute a real on-chain transaction.',
   parameters: {
     poll_id: {
       type: 'string',
@@ -135,6 +135,17 @@ export const getStatsTool: ToolDefinition = {
 };
 
 /**
+ * Get configured wallet public key
+ */
+export const getMyWalletTool: ToolDefinition = {
+  name: 'futarchy_get_my_wallet',
+  description:
+    'Get the public key of the configured wallet (from WALLET_PRIVATE_KEY environment variable). Use this to check your position or see which wallet will be used for voting. Returns an error if WALLET_PRIVATE_KEY is not configured.',
+  parameters: {},
+  required: [],
+};
+
+/**
  * All available tools
  */
 export const allTools: ToolDefinition[] = [
@@ -143,6 +154,7 @@ export const allTools: ToolDefinition[] = [
   getPositionTool,
   voteTool,
   getStatsTool,
+  getMyWalletTool,
 ];
 
 /**
@@ -154,4 +166,5 @@ export const ToolNames = {
   GET_POSITION: 'futarchy_get_position',
   VOTE: 'futarchy_vote',
   GET_STATS: 'futarchy_get_stats',
+  GET_MY_WALLET: 'futarchy_get_my_wallet',
 } as const;
