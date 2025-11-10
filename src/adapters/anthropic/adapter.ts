@@ -3,7 +3,7 @@
  * Converts universal tools to Claude tool use format
  */
 
-import type { Tool } from '@anthropic-ai/sdk/resources/messages.mjs';
+import type { Tool } from '@anthropic-ai/sdk/resources/messages';
 import { allTools, ToolDefinition, ToolParameter } from '../../tools/definitions.js';
 import { executeTool, ToolContext } from '../../tools/handlers.js';
 import { Futarchy402Client } from '../../core/client.js';

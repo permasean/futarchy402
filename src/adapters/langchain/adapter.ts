@@ -69,7 +69,7 @@ function toolToZodSchema(tool: ToolDefinition): z.ZodObject<any> {
 export function toLangChainTool(
   tool: ToolDefinition,
   context: ToolContext
-): DynamicStructuredTool {
+): DynamicStructuredTool<any> {
   const schema = toolToZodSchema(tool);
 
   return new DynamicStructuredTool({
@@ -92,7 +92,7 @@ export function toLangChainTool(
 /**
  * Get all Futarchy402 tools in LangChain format
  */
-export function getLangChainTools(client?: Futarchy402Client): DynamicStructuredTool[] {
+export function getLangChainTools(client?: Futarchy402Client): DynamicStructuredTool<any>[] {
   const context: ToolContext = {
     client: client || new Futarchy402Client(),
   };
@@ -105,7 +105,7 @@ export function getLangChainTools(client?: Futarchy402Client): DynamicStructured
  */
 export class LangChainFutarchyAdapter {
   private client: Futarchy402Client;
-  private tools: DynamicStructuredTool[];
+  private tools: DynamicStructuredTool<any>[];
 
   constructor(client?: Futarchy402Client) {
     this.client = client || new Futarchy402Client();
@@ -115,14 +115,14 @@ export class LangChainFutarchyAdapter {
   /**
    * Get all tools
    */
-  getTools(): DynamicStructuredTool[] {
+  getTools(): DynamicStructuredTool<any>[] {
     return this.tools;
   }
 
   /**
    * Get a specific tool by name
    */
-  getTool(name: string): DynamicStructuredTool | undefined {
+  getTool(name: string): DynamicStructuredTool<any> | undefined {
     return this.tools.find((tool) => tool.name === name);
   }
 

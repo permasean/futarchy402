@@ -204,8 +204,8 @@ export async function executeVoteWithConfirmation(params: VoteParams): Promise<V
     const result = (await paymentResponse.json()) as VoteResult;
 
     return {
-      success: true,
       ...result,
+      success: true,
       transaction_signature: signature,
     };
   } catch (error: any) {
