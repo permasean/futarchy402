@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "futarchy402": {
+      "command": "node",
+      "args": ["dist/adapters/mcp/server.js"],
+      "env": {
+        "FUTARCHY_API_URL": "https://futarchy402-api-385498168887.us-central1.run.app"
+      }
+    }
+  }
+}
